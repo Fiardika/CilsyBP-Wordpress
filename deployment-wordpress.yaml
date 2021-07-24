@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: prod-wordpress
+  namespace: stag-wordpress
   name: wordpress-deployment
   labels:
     app: wordpress-deployment
@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: wordpress-deployment
-        image: fiardika/wordpress-jenkins:latest
+        image: fiardika/staging-wordpress-jenkins:latest
         imagePullPolicy: "Always"
         ports:
         - containerPort: 80
@@ -27,7 +27,7 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  namespace: prod-wordpress
+  namespace: stag-wordpress
   name: wordpress-service
 spec:
   selector:
@@ -42,7 +42,7 @@ spec:
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
-  namespace: prod-wordpress
+  namespace: stag-wordpress
   name: ingress
   annotations:
      kubernetes.io/ingress.class: "nginx"
@@ -55,7 +55,7 @@ metadata:
      nginx.ingress.kubernetes.io/session-cookie-hash: sha1
 spec:
   rules:
-  - host: blog.fiardika.xyz
+  - host: blog-staging.fiardika.xyz
     http:
       paths:
         - backend:
