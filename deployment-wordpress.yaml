@@ -6,7 +6,7 @@ metadata:
   labels:
     app: wordpress-deployment
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: wordpress-deployment
@@ -44,15 +44,6 @@ kind: Ingress
 metadata:
   namespace: prod-wordpress
   name: ingress
-  annotations:
-     kubernetes.io/ingress.class: "nginx"
-     nginx.ingress.kubernetes.io/affinity: "cookie"
-     nginx.ingress.kubernetes.io/session-cookie-name: "prod-wordpress-cookie"
-     nginx.ingress.kubernetes.io/session-cookie-expires: "86400"
-     nginx.ingress.kubernetes.io/session-cookie-max-age: "86400"
-     nginx.ingress.kubernetes.io/ssl-redirect: "false"
-     nginx.ingress.kubernetes.io/affinity-mode: persistent
-     nginx.ingress.kubernetes.io/session-cookie-hash: sha1
 spec:
   rules:
   - host: blog.fiardika.xyz
